@@ -1,0 +1,141 @@
+name: Manual Release & Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      release_notes:
+        description: 'Release notes (optional)'
+        required: false
+        type: string
+      skip_npm_publish:
+        description: 'Skip npm publish (for testing)'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  manual-release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.15'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Format code
+        run: npm run format
+
+      - name: Bump version
+        run: |
+          # Configure git for npm version
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          # Get current version
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "current_version=$CURRENT_VERSION" >> $GITHUB_ENV
+
+          # Bump version based on input
+          npm version ${{ github.event.inputs.version_type }} --no-git-tag-version
+
+          # Get new version
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
+
+          # Commit version bump
+          git add package.json
+          git commit -m "chore: bump version to $NEW_VERSION [skip ci]"
+          git push
+
+      - name: Update README version history
+        run: |
+          NEW_VERSION="${{ env.new_version }}"
+          CURRENT_VERSION="${{ env.current_version }}"
+
+          # Create version entry with custom release notes if provided
+          if [ -n "${{ github.event.inputs.release_notes }}" ]; then
+            VERSION_ENTRY="- **$NEW_VERSION** - ${{ github.event.inputs.release_notes }}"
+          else
+            VERSION_ENTRY="- **$NEW_VERSION** - Manual ${{ github.event.inputs.version_type }} release"
+          fi
+
+          # Update README.md
+          sed -i "0,/^## Version history$/!b; /^## Version history$/,/^##/ { /^- \*\*$CURRENT_VERSION\*\*/a\\
+          $VERSION_ENTRY
+          }" README.md
+
+          # Commit README update
+          git add README.md
+          git commit -m "docs: update version history to $NEW_VERSION [skip ci]" || echo "No README changes to commit"
+          git push || echo "No README changes to push"
+
+      - name: Publish to npm
+        if: github.event.inputs.skip_npm_publish != 'true'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.new_version }}
+          release_name: Release v${{ env.new_version }}
+          body: |
+            ## Changes in v${{ env.new_version }}
+
+            ${{ github.event.inputs.release_notes || 'Manual release - see commit history for changes.' }}
+
+            ## Installation
+
+            ```bash
+            npm install n8n-nodes-marketing-architects-node@${{ env.new_version }}
+            ```
+
+            ## Version Type
+            - **${{ github.event.inputs.version_type }}** version bump
+          draft: false
+          prerelease: false
+
+      - name: Notify success
+        run: |
+          if [ "${{ github.event.inputs.skip_npm_publish }}" = "true" ]; then
+            echo "✅ Successfully created version ${{ env.new_version }} (npm publish skipped)"
+          else
+            echo "✅ Successfully published version ${{ env.new_version }} to npm"
+            echo "📦 Package: https://www.npmjs.com/package/n8n-nodes-marketing-architects-node"
+          fi
+          echo "🏷️  Release: https://github.com/${{ github.repository }}/releases/tag/v${{ env.new_version }}"
