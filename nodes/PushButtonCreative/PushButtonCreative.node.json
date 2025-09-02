@@ -1,0 +1,13 @@
+{
+	"node": "n8n-nodes-base.pushButtonCreative",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Development", "Developer Tools"],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://pushbtn.api.misfitsandmachines.com/swagger"
+			}
+		]
+	}
+}
