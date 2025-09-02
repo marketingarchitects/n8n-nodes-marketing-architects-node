@@ -11,8 +11,9 @@ export class PushButtonCreative implements INodeType {
 		displayName: 'Push Button Creative',
 		name: 'pushButtonCreative',
 		group: ['transform'],
+		icon: { light: 'file:pushbuttoncreative.svg', dark: 'file:pushbuttoncreative.svg' },
 		version: 1,
-		description: 'Basic Example Node',
+		description: 'This node is used to create a push button creative',
 		defaults: {
 			name: 'Push Button Creative',
 		},
