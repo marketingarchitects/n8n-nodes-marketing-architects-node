@@ -6,15 +6,15 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionType, NodeOperationError } from 'n8n-workflow';
 
-export class ExampleNode implements INodeType {
+export class PushButtonNode implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Example Node - Cottam Testing 2',
-		name: 'exampleNode',
+		displayName: 'Push Button Node - Cottam',
+		name: 'pushButtonNode',
 		group: ['transform'],
 		version: 1,
 		description: 'Basic Example Node',
 		defaults: {
-			name: 'Example Node - Cottam Testing 2',
+			name: 'Push Button Node - Cottam',
 		},
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],

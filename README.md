@@ -12,13 +12,13 @@ If you would like your node to be available on n8n cloud you can also [submit yo
 
 You need the following installed on your development machine:
 
-* [git](https://git-scm.com/downloads)
-* Node.js and npm. Minimum version Node 20. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
+- [git](https://git-scm.com/downloads)
+- Node.js and npm. Minimum version Node 20. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
+- Install n8n with:
   ```
   npm install n8n -g
   ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+- Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
 
 ## Using this starter
 
@@ -46,3 +46,57 @@ Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/
 ## License
 
 [MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+
+## Cottam's README
+
+## Development
+
+### Run an initial build and make it linkable to n8n
+
+```
+npm run build
+npm link
+```
+
+### List nodes and credentials in package.json
+
+```
+"n8n": {
+  "n8nNodesApiVersion": 1,
+  "credentials": [
+    "dist/credentials/ExampleCredentialsApi.credentials.js",
+  ],
+  "nodes": [
+    "dist/nodes/ExampleNode/ExampleNode.node.js",
+  ]
+}
+```
+
+### Link build to n8n
+
+```
+# In the nodes directory within your n8n installation
+cd ~/.n8n/nodes
+
+# node-package-name is the name from the package.json
+# npm link <node-package-name>
+npm link n8n-nodes-cottam-node
+```
+
+### Start n8n and see your node
+
+```
+n8n start
+```
+
+### Iterate on your node
+
+```
+npm run dev
+```
+
+### Restart n8n to see your changes
+
+```
+n8n start
+```
