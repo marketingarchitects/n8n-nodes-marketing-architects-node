@@ -89,6 +89,11 @@ npm link n8n-nodes-cottam-node
 n8n start
 ```
 
+### Login
+
+user: jcottam@gmail.com
+pw: Skitaos505!
+
 ### Iterate on your node
 
 ```

@@ -6,31 +6,62 @@ import type {
 } from 'n8n-workflow';
 import { NodeConnectionType, NodeOperationError } from 'n8n-workflow';
 
-export class PushButtonCreative implements INodeType {
+import { chatFields, chatOperations } from './ChatDescription';
+import { textFields, textOperations } from './TextDescription';
+
+export class MarketingArchitects implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Push Button Creative',
-		name: 'pushButtonCreative',
+		displayName: 'Marketing Architects',
+		name: 'marketingArchitects',
 		group: ['transform'],
-		icon: { light: 'file:pushbuttoncreative.svg', dark: 'file:pushbuttoncreative.svg' },
+		icon: { light: 'file:ma.svg', dark: 'file:ma-dark.svg' },
+		subtitle: '={{ $parameter["operation"] + ": " + $parameter["resource"] }}',
 		version: 1,
-		description: 'This node is used to create a push button creative',
+		description: 'Consume Marketing Architects API',
 		defaults: {
-			name: 'Push Button Creative',
+			name: 'Marketing Architects',
 		},
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],
 		usableAsTool: true,
-		properties: [
-			// Node properties which the user gets displayed and
-			// can change on the node.
+		credentials: [
 			{
-				displayName: 'My String',
-				name: 'myString',
-				type: 'string',
-				default: '',
-				placeholder: 'Placeholder value',
-				description: 'The description text',
+				name: 'marketingArchitectsApi',
+				required: true,
 			},
+		],
+		requestDefaults: {
+			baseURL: 'https://pushbtn.api.misfitsandmachines.com',
+			url: '',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: '={{"Bearer " + $credentials.token}}',
+			},
+		},
+		properties: [
+			{
+				displayName: 'Resource',
+				name: 'resource',
+				type: 'options',
+				noDataExpression: true,
+				options: [
+					{
+						name: 'Text',
+						value: 'text',
+					},
+					{
+						name: 'Chat',
+						value: 'chat',
+					},
+				],
+				default: 'text',
+			},
+			...chatOperations,
+			...chatFields,
+
+			...textOperations,
+			...textFields,
 		],
 	};
 

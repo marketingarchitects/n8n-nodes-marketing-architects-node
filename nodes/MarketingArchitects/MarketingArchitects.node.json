@@ -1,8 +1,8 @@
 {
-	"node": "n8n-nodes-base.pushButtonCreative",
+	"node": "n8n-nodes-base.marketingArchitects",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Development", "Developer Tools"],
+	"categories": ["Utility", "Marketing"],
 	"resources": {
 		"primaryDocumentation": [
 			{

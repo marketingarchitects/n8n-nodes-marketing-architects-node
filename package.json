@@ -34,11 +34,12 @@
 		"n8nNodesApiVersion": 1,
 		"credentials": [
 			"dist/credentials/ExampleCredentialsApi.credentials.js",
-			"dist/credentials/HttpBinApi.credentials.js"
+			"dist/credentials/HttpBinApi.credentials.js",
+			"dist/credentials/MarketingArchitectsApi.credentials.js"
 		],
 		"nodes": [
 			"dist/nodes/ExampleNode/ExampleNode.node.js",
-			"dist/nodes/PushButtonCreative/PushButtonCreative.node.js",
+			"dist/nodes/MarketingArchitects/MarketingArchitects.node.js",
 			"dist/nodes/HttpBin/HttpBin.node.js"
 		]
 	},
