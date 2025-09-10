@@ -47,12 +47,12 @@ export class MarketingArchitects implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Text',
-						value: 'text',
-					},
-					{
 						name: 'Chat',
 						value: 'chat',
+					},
+					{
+						name: 'Text',
+						value: 'text',
 					},
 				],
 				default: 'text',

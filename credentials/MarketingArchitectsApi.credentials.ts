@@ -44,7 +44,7 @@ export class MarketingArchitectsApi implements ICredentialType {
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: '={{$credentials?.domain}}',
-			url: '/swagger/index.html',
+			url: '/verify',
 		},
 	};
 }
