@@ -24,21 +24,58 @@ export const imageGenerationFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Model',
+		displayName: 'Model Name or ID',
 		name: 'model',
 		type: 'options',
-		description: 'The model which will generate the image generation',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 		displayOptions: {
 			show: {
 				operation: ['imageGeneration'],
 			},
 		},
-		options: [
-			{
-				name: 'Seedream 3',
-				value: 'bytedance/seedream-3',
+		typeOptions: {
+			loadOptions: {
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/replicate/models',
+						qs: {
+							type: 'image',
+						},
+					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'data',
+								},
+							},
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'models',
+								},
+							},
+							{
+								type: 'setKeyValue',
+								properties: {
+									name: '={{$responseItem.model}}',
+									value: '={{$responseItem.model}}',
+								},
+							},
+							{
+								type: 'sort',
+								properties: {
+									key: 'name',
+								},
+							},
+						],
+					},
+				},
 			},
-		],
+		},
 		routing: {
 			send: {
 				type: 'body',

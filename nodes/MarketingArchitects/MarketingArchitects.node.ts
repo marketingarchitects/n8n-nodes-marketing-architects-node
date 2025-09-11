@@ -36,6 +36,23 @@ export class MarketingArchitects implements INodeType {
 		},
 
 		properties: [
+			// {
+			// 	displayName: 'Resource',
+			// 	name: 'resource',
+			// 	type: 'options',
+			// 	noDataExpression: true,
+			// 	options: [
+			// 		{
+			// 			name: 'Text',
+			// 			value: 'text',
+			// 		},
+			// 		{
+			// 			name: 'Image',
+			// 			value: 'image',
+			// 		},
+			// 	],
+			// 	default: 'text',
+			// },
 			{
 				displayName: 'Operation',
 				name: 'operation',
@@ -59,7 +76,7 @@ export class MarketingArchitects implements INodeType {
 						name: 'Image Generation',
 						value: 'imageGeneration',
 						action: 'Create an image generation',
-						description: 'Create an image generation',
+						description: 'Create an image generation for a given prompt',
 						routing: {
 							request: {
 								method: 'POST',
