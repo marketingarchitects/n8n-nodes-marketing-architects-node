@@ -63,7 +63,7 @@ export class MarketingArchitects implements INodeType {
 						routing: {
 							request: {
 								method: 'POST',
-								url: '/generation/open-router',
+								url: '/image/replicate',
 							},
 							output: { postReceive: [sendErrorPostReceive] },
 						},
