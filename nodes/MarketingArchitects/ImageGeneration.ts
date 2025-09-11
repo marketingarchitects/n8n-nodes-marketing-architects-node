@@ -1,48 +1,14 @@
 import type { INodeProperties } from 'n8n-workflow';
 
-import { sendErrorPostReceive } from './GenericFunctions';
-
-export const chatOperations: INodeProperties[] = [
-	{
-		displayName: 'Operation',
-		name: 'operation',
-		type: 'options',
-		noDataExpression: true,
-		displayOptions: {
-			show: {
-				resource: ['chat'],
-			},
-		},
-		options: [
-			{
-				name: 'Complete',
-				value: 'complete',
-				action: 'Create a text completion',
-				description: 'Create a text completion for a given prompt',
-				routing: {
-					request: {
-						method: 'POST',
-						url: '/generation/open-router',
-					},
-					output: { postReceive: [sendErrorPostReceive] },
-				},
-			},
-		],
-		default: 'complete',
-	},
-];
-
-const completeOperations: INodeProperties[] = [
+export const imageGenerationFields: INodeProperties[] = [
 	{
 		displayName: 'Model',
 		name: 'model',
 		type: 'options',
-		description: 'The model which will generate the completion',
+		description: 'The model which will generate the image generation',
 		displayOptions: {
 			show: {
-				operation: ['complete'],
-				resource: ['chat'],
-				'@version': [1],
+				operation: ['imageGeneration'],
 			},
 		},
 		options: [
@@ -75,6 +41,7 @@ const completeOperations: INodeProperties[] = [
 		},
 		default: 'openai/gpt-4o',
 	},
+
 	{
 		displayName: 'Prompt',
 		name: 'prompt',
@@ -85,8 +52,7 @@ const completeOperations: INodeProperties[] = [
 		},
 		displayOptions: {
 			show: {
-				resource: ['chat'],
-				operation: ['complete'],
+				operation: ['imageGeneration'],
 			},
 		},
 		placeholder: 'Add Message',
@@ -134,5 +100,3 @@ const completeOperations: INodeProperties[] = [
 		},
 	},
 ];
-
-export const chatFields: INodeProperties[] = [...completeOperations];
