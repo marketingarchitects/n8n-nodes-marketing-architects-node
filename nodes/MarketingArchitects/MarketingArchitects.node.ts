@@ -59,11 +59,11 @@ export class MarketingArchitects implements INodeType {
 						name: 'Image Generation',
 						value: 'imageGeneration',
 						action: 'Create an image generation',
-						description: 'Create an image generation for a given prompt',
+						description: 'Create an image generation',
 						routing: {
 							request: {
 								method: 'POST',
-								url: '/generation/open-router',
+								url: '/image/replicate',
 							},
 							output: { postReceive: [sendErrorPostReceive] },
 						},
