@@ -1,6 +1,7 @@
 import { NodeConnectionType } from 'n8n-workflow';
 import { textCompletionFields } from './TextCompletion';
 import { imageGenerationFields } from './ImageGeneration';
+import { projectFields } from './Project';
 import { sendErrorPostReceive } from './GenericFunctions';
 import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
@@ -43,6 +44,10 @@ export class MarketingArchitects implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Project',
+						value: 'project',
+					},
+					{
 						name: 'Text',
 						value: 'text',
 					},
@@ -51,7 +56,7 @@ export class MarketingArchitects implements INodeType {
 						value: 'image',
 					},
 				],
-				default: 'text',
+				default: 'project',
 			},
 			{
 				displayName: 'Operation',
@@ -107,9 +112,40 @@ export class MarketingArchitects implements INodeType {
 				],
 				default: 'imageGeneration',
 			},
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['project'],
+					},
+				},
+				options: [
+					{
+						name: 'Log Event',
+						value: 'logEvent',
+						action: 'Log an event',
+						description: 'Log an event',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/logs',
+								body: {
+									source: '={{$workflow.name}}',
+								},
+							},
+							output: { postReceive: [sendErrorPostReceive] },
+						},
+					},
+				],
+				default: 'logEvent',
+			},
 
 			...textCompletionFields,
 			...imageGenerationFields,
+			...projectFields,
 		],
 	};
 }
