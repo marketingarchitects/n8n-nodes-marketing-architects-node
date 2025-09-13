@@ -8,7 +8,7 @@ import {
 export class MarketingArchitectsApi implements ICredentialType {
 	name = 'marketingArchitectsApi';
 	displayName = 'Marketing Architects API';
-	documentationUrl = 'https://pushbtn.api.misfitsandmachines.com/swagger';
+	documentationUrl = 'https://pushbtn.api.misfitsandmachines.com';
 	properties: INodeProperties[] = [
 		{
 			displayName: 'Token',

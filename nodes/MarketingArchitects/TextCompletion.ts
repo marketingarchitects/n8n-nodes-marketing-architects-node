@@ -5,34 +5,53 @@ export const textCompletionFields: INodeProperties[] = [
 		displayName: 'Model',
 		name: 'model',
 		type: 'options',
-		description: 'The model which will generate the completion',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 		displayOptions: {
 			show: {
+				resource: ['text'],
 				operation: ['textCompletion'],
 			},
 		},
-		options: [
-			{
-				name: 'Claude Sonnet 4',
-				value: 'anthropic/claude-sonnet-4',
+		typeOptions: {
+			loadOptions: {
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/generation/openrouter/models',
+					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'data',
+								},
+							},
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'data',
+								},
+							},
+							{
+								type: 'setKeyValue',
+								properties: {
+									name: '={{$responseItem.id}}',
+									value: '={{$responseItem.id}}',
+								},
+							},
+							{
+								type: 'sort',
+								properties: {
+									key: 'name',
+								},
+							},
+						],
+					},
+				},
 			},
-			{
-				name: 'Gemini 2.5 Pro',
-				value: 'google/gemini-2.5-pro',
-			},
-			{
-				name: 'GPT-4o',
-				value: 'openai/gpt-4o',
-			},
-			{
-				name: 'GPT-5',
-				value: 'openai/gpt-5',
-			},
-			{
-				name: 'Qwen3 Max',
-				value: 'qwen/qwen3-max',
-			},
-		],
+		},
 		routing: {
 			send: {
 				type: 'body',
@@ -44,7 +63,7 @@ export const textCompletionFields: INodeProperties[] = [
 
 	{
 		displayName: 'Prompt',
-		name: 'prompt',
+		name: 'textPrompt',
 		type: 'fixedCollection',
 		typeOptions: {
 			sortable: true,
@@ -52,6 +71,7 @@ export const textCompletionFields: INodeProperties[] = [
 		},
 		displayOptions: {
 			show: {
+				resource: ['text'],
 				operation: ['textCompletion'],
 			},
 		},

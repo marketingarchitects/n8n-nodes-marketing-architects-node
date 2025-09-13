@@ -36,28 +36,33 @@ export class MarketingArchitects implements INodeType {
 		},
 
 		properties: [
-			// {
-			// 	displayName: 'Resource',
-			// 	name: 'resource',
-			// 	type: 'options',
-			// 	noDataExpression: true,
-			// 	options: [
-			// 		{
-			// 			name: 'Text',
-			// 			value: 'text',
-			// 		},
-			// 		{
-			// 			name: 'Image',
-			// 			value: 'image',
-			// 		},
-			// 	],
-			// 	default: 'text',
-			// },
+			{
+				displayName: 'Resource',
+				name: 'resource',
+				type: 'options',
+				noDataExpression: true,
+				options: [
+					{
+						name: 'Text',
+						value: 'text',
+					},
+					{
+						name: 'Image',
+						value: 'image',
+					},
+				],
+				default: 'text',
+			},
 			{
 				displayName: 'Operation',
 				name: 'operation',
 				type: 'options',
 				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['text'],
+					},
+				},
 				options: [
 					{
 						name: 'Text Completion',
@@ -72,6 +77,20 @@ export class MarketingArchitects implements INodeType {
 							output: { postReceive: [sendErrorPostReceive] },
 						},
 					},
+				],
+				default: 'textCompletion',
+			},
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['image'],
+					},
+				},
+				options: [
 					{
 						name: 'Image Generation',
 						value: 'imageGeneration',
@@ -86,8 +105,9 @@ export class MarketingArchitects implements INodeType {
 						},
 					},
 				],
-				default: 'textCompletion',
+				default: 'imageGeneration',
 			},
+
 			...textCompletionFields,
 			...imageGenerationFields,
 		],
