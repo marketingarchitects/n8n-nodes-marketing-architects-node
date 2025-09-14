@@ -82,6 +82,7 @@ To obtain your API credentials, visit the [Marketing Architects API Documentatio
 
 ## Version history
 
+- **0.1.1** - Added GitHub Actions workflow for publishing to npm and creating GitHub releases
 - **0.1.0** - Initial release with Text Completion, Image Generation, and Project Log Event operations
 
 ## Development
@@ -255,144 +256,54 @@ npm version major
 
 ## Publishing to npm
 
-### Prerequisites
+### Recommended: GitHub Actions Workflow
 
-1. **Create npm account** at [npmjs.com](https://www.npmjs.com/)
-2. **Login to npm**:
+This project includes an automated GitHub Actions workflow that handles the entire publishing process. This is the **recommended approach** for publishing new versions.
 
-```bash
-npm login
-```
+#### Setup (One-time)
 
-3. **Verify your account** (if required by npm)
+1. **Add NPM_TOKEN to GitHub Secrets**:
+   - Generate a token at [npmjs.com/settings/tokens](https://www.npmjs.com/settings/tokens)
+   - Add to GitHub: Settings → Secrets and variables → Actions → New repository secret
+   - Name: `NPM_TOKEN`, Value: your npm publish token
 
-### Pre-Publication Checklist
+#### Publishing a New Version
 
-1. **Build the project**:
-
-```bash
-npm run build
-```
-
-2. **Run all quality checks**:
-
-```bash
-npm run lint
-npm run format
-npm run lintfix
-```
-
-3. **Test the built package**:
-
-```bash
-npm pack
-# This creates a .tgz file you can inspect
-```
-
-4. **Update version** (if not done already):
-
-```bash
-npm version patch  # or minor/major
-```
-
-### Publishing Process
-
-1. **Publish to npm**:
-
-```bash
-npm publish
-```
-
-2. **Verify publication**:
-
-```bash
-npm view n8n-nodes-marketing-architects-node
-```
-
-3. **Test installation**:
-
-```bash
-# In a test environment
-npm install n8n-nodes-marketing-architects-node
-```
-
-### Post-Publication
-
-1. **Create GitHub release** (if using GitHub):
-
-```bash
-git tag v0.2.0
-git push origin v0.2.0
-```
-
-2. **Update n8n community nodes registry** (if applicable)
-
-3. **Update documentation** and notify users of new features
-
-### Troubleshooting
-
-- **Permission denied**: Ensure you're logged in with `npm login`
-- **Version already exists**: Bump version with `npm version patch`
-- **Build errors**: Fix linting issues with `npm run lintfix`
-- **Package too large**: Check `.npmignore` file to exclude unnecessary files
-
-### GitHub Actions Workflow
-
-This project includes a GitHub Actions workflow for manual publishing with full control:
-
-#### Manual Release & Publish (`manual-release.yml`)
-
-Provides complete control over version bumping and publishing:
-
-- **Triggers**: Manual workflow dispatch from GitHub Actions tab
-- **Options**:
-  - Choose version type (patch/minor/major)
-  - Add custom release notes
-  - Option to skip npm publish (for testing)
-- **Features**:
-  - Full control over release timing
-  - Quality checks before publishing
-  - Updates README version history
-  - Creates GitHub releases
-
-#### Setup Requirements
-
-1. **NPM_TOKEN Secret**: Add your npm publish token to GitHub repository secrets
-
-   ```bash
-   # Generate token at https://www.npmjs.com/settings/tokens
-   # Add to GitHub: Settings → Secrets and variables → Actions → New repository secret
-   # Name: NPM_TOKEN
-   # Value: your-npm-publish-token
-   ```
-
-2. **Repository Permissions**: Ensure the following permissions are enabled:
-   - `Contents: write` (for version commits)
-   - `Packages: write` (for npm publishing)
-   - `ID-token: write` (for npm authentication)
-
-#### Workflow Features
-
-- ✅ **Manual Control**: Full control over when and what gets published
-- ✅ **Quality Checks**: Runs linting, formatting, and builds before publishing
-- ✅ **Documentation Updates**: Updates README version history
-- ✅ **GitHub Releases**: Creates tagged releases with installation instructions
-- ✅ **Skip CI**: Uses `[skip ci]` to prevent infinite loops on version commits
-- ✅ **Testing Mode**: Option to skip npm publish for testing the workflow
-- ✅ **Flexible Versioning**: Choose patch, minor, or major version bumps
-
-#### Usage Examples
-
-**Manual Release** (via GitHub Actions tab):
-
-1. Go to Actions → Manual Release & Publish
-2. Click "Run workflow"
+1. Go to **Actions** → **Manual Release & Publish**
+2. Click **"Run workflow"**
 3. Choose version type (patch/minor/major)
 4. Add optional release notes
-5. Optionally check "Skip npm publish" for testing
-6. Click "Run workflow"
+5. Click **"Run workflow"**
 
-**Testing the Workflow**:
+The workflow automatically:
 
-- Use "Skip npm publish" option to test version bumping and GitHub releases without publishing to npm
-- Useful for validating the workflow before actual publication
+- ✅ Runs quality checks (linting, formatting, build)
+- ✅ Bumps version in package.json
+- ✅ Updates README version history
+- ✅ Publishes to npm
+- ✅ Creates GitHub release with installation instructions
+
+#### Testing Before Publishing
+
+Use the **"Skip npm publish"** option to test version bumping and GitHub releases without actually publishing to npm.
+
+### Manual CLI Publishing (Alternative)
+
+If you prefer manual publishing:
+
+```bash
+# Build and quality checks
+npm run build
+npm run lint
+npm run format
+
+# Bump version and publish
+npm version patch  # or minor/major
+npm publish
+
+# Create GitHub release
+git tag v$(node -p "require('./package.json').version")
+git push origin --tags
+```
+
+**Note**: Manual publishing requires npm login and doesn't include automated quality checks or documentation updates.
