@@ -3,17 +3,18 @@
 	"version": "0.1.0",
 	"description": "Marketing Architects Node for n8n",
 	"keywords": [
-		"n8n-community-node-package"
+		"n8n-community-node-package",
+		"marketing-architects"
 	],
 	"license": "MIT",
-	"homepage": "",
+	"homepage": "https://marketingarchitects.com",
 	"author": {
 		"name": "John Ryan Cottam",
 		"email": "jcottam@markarch.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/jcottam/n8n-nodes-marketing-architects-node.git"
+		"url": "https://github.com/marketingarchitects/n8n-nodes-marketing-architects-node.git"
 	},
 	"engines": {
 		"node": ">=20.15"

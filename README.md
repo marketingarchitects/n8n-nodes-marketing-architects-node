@@ -54,6 +54,8 @@ Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/
 ### Run an initial build and make it linkable to n8n
 
 ```
+npm run lint
+npm run lintfix
 npm run build
 npm link
 ```
@@ -64,10 +66,10 @@ npm link
 "n8n": {
   "n8nNodesApiVersion": 1,
   "credentials": [
-    "dist/credentials/ExampleCredentialsApi.credentials.js",
+    "dist/credentials/MarketingArchitectsApi.credentials.js"
   ],
   "nodes": [
-    "dist/nodes/ExampleNode/ExampleNode.node.js",
+    "dist/nodes/MarketingArchitects/MarketingArchitects.node.js"
   ]
 }
 ```
