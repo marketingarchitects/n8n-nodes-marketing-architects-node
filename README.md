@@ -16,6 +16,7 @@ Marketing Architects is a platform for creating and managing marketing campaigns
 - [Operations](#operations)
 - [Credentials](#credentials)
 - [Compatibility](#compatibility)
+- [Usage](#usage)
 - [Resources](#resources)
 - [Version history](#version-history)
 - [Development](#development)
@@ -56,6 +57,8 @@ To obtain your API credentials, visit the [Marketing Architects API Documentatio
 
 - n8n 1.110.1 and above
 - Node.js 20.15 and above
+
+## Usage
 
 ### Basic Setup
 
@@ -333,7 +336,7 @@ git push origin v0.2.0
 - **Build errors**: Fix linting issues with `npm run lintfix`
 - **Package too large**: Check `.npmignore` file to exclude unnecessary files
 
-### Automated Publishing
+### GitHub Actions Workflow
 
 This project includes a GitHub Actions workflow for manual publishing with full control:
 
@@ -349,8 +352,8 @@ Provides complete control over version bumping and publishing:
 - **Features**:
   - Full control over release timing
   - Quality checks before publishing
-  - Automatic documentation updates
-  - GitHub release creation
+  - Updates README version history
+  - Creates GitHub releases
 
 #### Setup Requirements
 
@@ -372,7 +375,7 @@ Provides complete control over version bumping and publishing:
 
 - ✅ **Manual Control**: Full control over when and what gets published
 - ✅ **Quality Checks**: Runs linting, formatting, and builds before publishing
-- ✅ **Automatic Documentation**: Updates README version history automatically
+- ✅ **Documentation Updates**: Updates README version history
 - ✅ **GitHub Releases**: Creates tagged releases with installation instructions
 - ✅ **Skip CI**: Uses `[skip ci]` to prevent infinite loops on version commits
 - ✅ **Testing Mode**: Option to skip npm publish for testing the workflow
