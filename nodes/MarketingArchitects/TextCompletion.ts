@@ -3,7 +3,7 @@ import type { INodeProperties } from 'n8n-workflow';
 export const textCompletionFields: INodeProperties[] = [
 	{
 		displayName: 'Model',
-		name: 'model',
+		name: 'textModel',
 		type: 'options',
 		description:
 			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
@@ -13,6 +13,7 @@ export const textCompletionFields: INodeProperties[] = [
 				operation: ['textCompletion'],
 			},
 		},
+		default: '',
 		typeOptions: {
 			loadOptions: {
 				routing: {
@@ -58,7 +59,6 @@ export const textCompletionFields: INodeProperties[] = [
 				property: 'model',
 			},
 		},
-		default: 'openai/gpt-4o',
 	},
 
 	{

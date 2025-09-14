@@ -3,7 +3,7 @@ import type { INodeProperties } from 'n8n-workflow';
 export const imageGenerationFields: INodeProperties[] = [
 	{
 		displayName: 'Prompt',
-		name: 'prompt',
+		name: 'imagePrompt',
 		type: 'string',
 		description: 'The prompt to generate the image',
 		displayOptions: {
@@ -21,7 +21,6 @@ export const imageGenerationFields: INodeProperties[] = [
 			send: {
 				type: 'body',
 				property: 'input.prompt',
-				// value: '={{$value.imagePrompt}}',
 			},
 		},
 	},
@@ -83,9 +82,8 @@ export const imageGenerationFields: INodeProperties[] = [
 			send: {
 				type: 'body',
 				property: 'model',
-				value: '={{$value.imageModel}}',
 			},
 		},
-		default: 'bytedance/seedream-3',
+		default: '',
 	},
 ];

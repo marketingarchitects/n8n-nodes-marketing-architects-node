@@ -1,19 +1,19 @@
 {
 	"name": "n8n-nodes-cottam-node",
 	"version": "0.1.0",
-	"description": "",
+	"description": "Marketing Architects API Node for n8n",
 	"keywords": [
 		"n8n-community-node-package"
 	],
 	"license": "MIT",
 	"homepage": "",
 	"author": {
-		"name": "John Cottam",
-		"email": ""
+		"name": "John Ryan Cottam",
+		"email": "jcottam@markarch.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/<...>/n8n-nodes-<...>.git"
+		"url": "https://github.com/jcottam/n8n-nodes-cottam-node.git"
 	},
 	"engines": {
 		"node": ">=20.15"
