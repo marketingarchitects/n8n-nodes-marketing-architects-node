@@ -62,8 +62,8 @@ export const textCompletionFields: INodeProperties[] = [
 	},
 
 	{
-		displayName: 'Prompt',
-		name: 'textPrompt',
+		displayName: 'Messages',
+		name: 'textMessages',
 		type: 'fixedCollection',
 		typeOptions: {
 			sortable: true,

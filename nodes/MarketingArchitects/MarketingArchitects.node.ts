@@ -1,6 +1,7 @@
 import { NodeConnectionType } from 'n8n-workflow';
 import { textCompletionFields } from './TextCompletion';
 import { imageGenerationFields } from './ImageGeneration';
+import { videoGenerationFields } from './VideoGeneration';
 import { projectFields } from './Project';
 import { sendErrorPostReceive } from './GenericFunctions';
 import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
@@ -55,6 +56,10 @@ export class MarketingArchitects implements INodeType {
 						name: 'Image',
 						value: 'image',
 					},
+					{
+						name: 'Video',
+						value: 'video',
+					},
 				],
 				default: 'project',
 			},
@@ -99,8 +104,8 @@ export class MarketingArchitects implements INodeType {
 					{
 						name: 'Image Generation',
 						value: 'imageGeneration',
-						action: 'Create an image generation',
-						description: 'Create an image generation for a given prompt',
+						action: 'Create an image',
+						description: 'Create an image for a given prompt',
 						routing: {
 							request: {
 								method: 'POST',
@@ -111,6 +116,33 @@ export class MarketingArchitects implements INodeType {
 					},
 				],
 				default: 'imageGeneration',
+			},
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['video'],
+					},
+				},
+				options: [
+					{
+						name: 'Video Generation',
+						value: 'videoGeneration',
+						action: 'Create a video',
+						description: 'Create a video for a given prompt',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/video/replicate',
+							},
+							output: { postReceive: [sendErrorPostReceive] },
+						},
+					},
+				],
+				default: 'videoGeneration',
 			},
 			{
 				displayName: 'Operation',
@@ -146,6 +178,7 @@ export class MarketingArchitects implements INodeType {
 			...textCompletionFields,
 			...imageGenerationFields,
 			...projectFields,
+			...videoGenerationFields,
 		],
 	};
 }
