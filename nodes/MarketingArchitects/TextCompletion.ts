@@ -113,6 +113,9 @@ export const textCompletionFields: INodeProperties[] = [
 						displayName: 'Content',
 						name: 'content',
 						type: 'string',
+						typeOptions: {
+							rows: 4,
+						},
 						default: '',
 					},
 				],

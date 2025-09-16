@@ -177,8 +177,8 @@ export class MarketingArchitects implements INodeType {
 
 			...textCompletionFields,
 			...imageGenerationFields,
-			...projectFields,
 			...videoGenerationFields,
+			...projectFields,
 		],
 	};
 }
