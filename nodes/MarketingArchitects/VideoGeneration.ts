@@ -125,15 +125,15 @@ export const videoGenerationFields: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'Start Reference Image',
-				name: 'start_image',
+				displayName: 'Image',
+				name: 'image',
 				default: '',
-				description: 'The start reference image to use for the video generation',
+				description: 'The start reference image to use for the video generation vith Veo',
 				type: 'string',
 				routing: {
 					send: {
 						type: 'body',
-						property: 'input.start_image',
+						property: 'input.image',
 					},
 				},
 			},
@@ -147,6 +147,42 @@ export const videoGenerationFields: INodeProperties[] = [
 					send: {
 						type: 'body',
 						property: 'input.negative_prompt',
+					},
+				},
+			},
+			{
+				displayName: 'Resolution',
+				name: 'resolution',
+				type: 'options',
+				default: '720p',
+				options: [
+					{
+						name: '720p',
+						value: '720p',
+					},
+					{
+						name: '1080p',
+						value: '1080p',
+					},
+				],
+				description: 'The resolution of the video to generate',
+				routing: {
+					send: {
+						type: 'body',
+						property: 'input.resolution',
+					},
+				},
+			},
+			{
+				displayName: 'Start Image',
+				name: 'start_image',
+				default: '',
+				description: 'The start reference image to use for the video generation',
+				type: 'string',
+				routing: {
+					send: {
+						type: 'body',
+						property: 'input.start_image',
 					},
 				},
 			},
