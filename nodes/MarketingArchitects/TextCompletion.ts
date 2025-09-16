@@ -129,4 +129,35 @@ export const textCompletionFields: INodeProperties[] = [
 			},
 		},
 	},
+
+	{
+		displayName: 'Options',
+		name: 'options',
+		placeholder: 'Add option',
+		description: 'Additional options to add',
+		type: 'collection',
+		default: {},
+		displayOptions: {
+			show: {
+				operation: ['textCompletion'],
+				resource: ['text'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Response Format (I.e. Structured Output) - The Model Must Support It',
+				name: 'response_format',
+				default: '',
+				description: 'The response format to use for the text generation',
+				type: 'json',
+				routing: {
+					send: {
+						type: 'body',
+						property: 'response_format',
+						value: '={{ JSON.parse($value) }}',
+					},
+				},
+			},
+		],
+	},
 ];
