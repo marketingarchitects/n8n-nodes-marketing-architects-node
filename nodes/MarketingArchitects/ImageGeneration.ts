@@ -78,7 +78,7 @@ export const imageGenerationFields: INodeProperties[] = [
 		default: 'a beautiful image of a cat',
 		placeholder: 'e.g. a beautiful image of a cat',
 		typeOptions: {
-			rows: 5,
+			rows: 4,
 		},
 		routing: {
 			send: {

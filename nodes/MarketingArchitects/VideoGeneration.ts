@@ -77,7 +77,7 @@ export const videoGenerationFields: INodeProperties[] = [
 		default: 'a cute panda eating in the forest',
 		placeholder: 'e.g. a cute panda eating in the forest',
 		typeOptions: {
-			rows: 5,
+			rows: 4,
 		},
 		routing: {
 			send: {
@@ -134,6 +134,19 @@ export const videoGenerationFields: INodeProperties[] = [
 					send: {
 						type: 'body',
 						property: 'input.start_image',
+					},
+				},
+			},
+			{
+				displayName: 'Negative Prompt',
+				name: 'negative_prompt',
+				default: '',
+				description: 'The negative prompt to use for the video generation',
+				type: 'string',
+				routing: {
+					send: {
+						type: 'body',
+						property: 'input.negative_prompt',
 					},
 				},
 			},
