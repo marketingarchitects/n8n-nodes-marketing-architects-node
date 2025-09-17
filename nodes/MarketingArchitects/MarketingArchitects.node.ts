@@ -3,6 +3,7 @@ import { textCompletionFields } from './TextCompletion';
 import { imageGenerationFields } from './ImageGeneration';
 import { videoGenerationFields } from './VideoGeneration';
 import { projectFields } from './Project';
+import { brandFields } from './Brand';
 import { sendErrorPostReceive } from './GenericFunctions';
 import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
@@ -45,16 +46,20 @@ export class MarketingArchitects implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Brand',
+						value: 'brand',
+					},
+					{
+						name: 'Image',
+						value: 'image',
+					},
+					{
 						name: 'Project',
 						value: 'project',
 					},
 					{
 						name: 'Text',
 						value: 'text',
-					},
-					{
-						name: 'Image',
-						value: 'image',
 					},
 					{
 						name: 'Video',
@@ -89,6 +94,31 @@ export class MarketingArchitects implements INodeType {
 					},
 				],
 				default: 'textCompletion',
+			},
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['brand'],
+					},
+				},
+				options: [
+					{
+						name: 'Get Brand Info',
+						value: 'getBrandInfo',
+						action: 'Get brand info',
+						description: 'Get brand info for a given domain',
+						routing: {
+							request: {
+								method: 'GET',
+							},
+						},
+					},
+				],
+				default: 'getBrandInfo',
 			},
 			{
 				displayName: 'Operation',
@@ -179,6 +209,7 @@ export class MarketingArchitects implements INodeType {
 			...imageGenerationFields,
 			...videoGenerationFields,
 			...projectFields,
+			...brandFields,
 		],
 	};
 }
