@@ -30,7 +30,11 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-This node provides three main resource types with the following operations:
+This node provides five main resource types with the following operations:
+
+### Brand Resource
+
+- **Get Brand Info**: Retrieve brand information and insights for a given domain
 
 ### Text Resource
 
@@ -39,6 +43,10 @@ This node provides three main resource types with the following operations:
 ### Image Resource
 
 - **Image Generation**: Create AI-generated images from text prompts using Replicate API
+
+### Video Resource
+
+- **Video Generation**: Create AI-generated videos from text prompts using advanced video generation APIs
 
 ### Project Resource
 
@@ -65,14 +73,8 @@ To obtain your API credentials, visit the [Marketing Architects API Documentatio
 1. Install the node following the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/)
 2. Configure your Marketing Architects API credentials
 3. Add the Marketing Architects node to your workflow
-4. Select the desired resource (Text, Image, or Project) and operation
+4. Select the desired resource (Brand, Text, Image, Video, or Project) and operation
 5. Configure the operation parameters and execute your workflow
-
-### Example Workflows
-
-- **Content Generation**: Use Text Completion to generate marketing copy from prompts
-- **Visual Content**: Use Image Generation to create marketing visuals from text descriptions
-- **Project Tracking**: Use Log Event to track workflow executions and project milestones
 
 ## Resources
 
@@ -80,17 +82,12 @@ To obtain your API credentials, visit the [Marketing Architects API Documentatio
 - [Marketing Architects API Documentation](https://pushbtn.api.misfitsandmachines.com)
 - [Repository](https://github.com/marketingarchitects/n8n-nodes-marketing-architects-node)
 
-## Version history
-
-- **0.1.1** - Added GitHub Actions workflow for publishing to npm and creating GitHub releases
-- **0.1.0** - Initial release with Text Completion, Image Generation, and Project Log Event operations
-
 ## Development
 
 ### Prerequisites
 
 - Node.js 20.15 or higher
-- npm or yarn package manager
+- npm package manager
 
 ### Run an initial build and make it linkable to n8n
 
@@ -213,54 +210,13 @@ npm link n8n-nodes-marketing-architects-node
 n8n start
 ```
 
-## Version Management
-
-### Bumping Version
-
-1. **Update package.json version**:
-
-```bash
-# Patch version (bug fixes)
-npm version patch
-
-# Minor version (new features)
-npm version minor
-
-# Major version (breaking changes)
-npm version major
-```
-
-2. **Update README.md version history**:
-
-```markdown
-## Version history
-
-- **0.2.0** - Added Analytics resource with performance tracking operations
-- **0.1.1** - Fixed authentication token handling
-- **0.1.0** - Initial release with Text Completion, Image Generation, and Project Log Event operations
-```
-
-3. **Update node version** in `MarketingArchitects.node.json` if needed:
-
-```json
-{
-	"nodeVersion": "2.0" // Increment for significant changes
-}
-```
-
-### Semantic Versioning Guidelines
-
-- **MAJOR** (1.0.0): Breaking changes to API or node behavior
-- **MINOR** (0.1.0): New features, new resources, or new operations
-- **PATCH** (0.0.1): Bug fixes, documentation updates, or small improvements
-
 ## Publishing to npm
 
-### Recommended: GitHub Actions Workflow
+### Automated GitHub Actions Workflow
 
 This project includes an automated GitHub Actions workflow that handles the entire publishing process. This is the **recommended approach** for publishing new versions.
 
-#### Setup (One-time)
+#### Setup (already done)
 
 1. **Add NPM_TOKEN to GitHub Secrets**:
    - Generate a token at [npmjs.com/settings/tokens](https://www.npmjs.com/settings/tokens)
@@ -269,11 +225,12 @@ This project includes an automated GitHub Actions workflow that handles the enti
 
 #### Publishing a New Version
 
+1. Commit your changes to main branch
 1. Go to **Actions** → **Manual Release & Publish**
-2. Click **"Run workflow"**
-3. Choose version type (patch/minor/major)
-4. Add optional release notes
-5. Click **"Run workflow"**
+1. Click **"Run workflow"**
+1. Choose version type (patch/minor/major)
+1. Add optional release notes
+1. Click **"Run workflow"**
 
 The workflow automatically:
 
