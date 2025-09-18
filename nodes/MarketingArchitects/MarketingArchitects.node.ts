@@ -4,6 +4,7 @@ import { imageGenerationFields } from './ImageGeneration';
 import { videoGenerationFields } from './VideoGeneration';
 import { projectFields } from './Project';
 import { brandFields } from './Brand';
+import { collageFields } from './Collage';
 import { sendErrorPostReceive } from './GenericFunctions';
 import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
@@ -144,6 +145,26 @@ export class MarketingArchitects implements INodeType {
 							output: { postReceive: [sendErrorPostReceive] },
 						},
 					},
+					{
+						name: 'Create Collage',
+						value: 'collage',
+						action: 'Create a collage',
+						description: 'Create a collage from multiple images',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/image/collage',
+								body: {
+									output: {
+										format: 'png',
+										quality: 100,
+										filename: 'collage.png',
+									},
+								},
+							},
+							output: { postReceive: [sendErrorPostReceive] },
+						},
+					},
 				],
 				default: 'imageGeneration',
 			},
@@ -210,6 +231,7 @@ export class MarketingArchitects implements INodeType {
 			...videoGenerationFields,
 			...projectFields,
 			...brandFields,
+			...collageFields,
 		],
 	};
 }
