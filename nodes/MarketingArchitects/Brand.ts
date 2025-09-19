@@ -64,7 +64,7 @@ export const brandFields: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'Retry Delay (seconds)',
+				displayName: 'Retry Delay (Seconds)',
 				name: 'retryDelay',
 				type: 'number',
 				default: 2,
