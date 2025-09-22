@@ -58,7 +58,7 @@ export const collageFields: INodeProperties[] = [
 				displayName: 'Width',
 				name: 'width',
 				type: 'number',
-				default: 1000,
+				default: 1920,
 				description: 'Width of the canvas in pixels',
 				routing: {
 					send: {
@@ -71,7 +71,7 @@ export const collageFields: INodeProperties[] = [
 				displayName: 'Height',
 				name: 'height',
 				type: 'number',
-				default: 1000,
+				default: 1080,
 				description: 'Height of the canvas in pixels',
 				routing: {
 					send: {
