@@ -1,7 +1,7 @@
 import { NodeConnectionType } from 'n8n-workflow';
 import { textCompletionFields } from './TextCompletion';
 import { imageGenerationFields } from './ImageGeneration';
-import { videoGenerationFields } from './VideoGeneration';
+import { videoGenerationFields, videoAnalyzeFields } from './Video';
 import { projectFields } from './Project';
 import { brandFields } from './Brand';
 import { collageFields } from './Collage';
@@ -192,6 +192,19 @@ export class MarketingArchitects implements INodeType {
 							output: { postReceive: [sendErrorPostReceive] },
 						},
 					},
+					{
+						name: 'Analyze Video',
+						value: 'analyzeVideo',
+						action: 'Analyze a video',
+						description: 'Analyze a video from a given URL',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/video/analyze',
+							},
+							output: { postReceive: [sendErrorPostReceive] },
+						},
+					},
 				],
 				default: 'videoGeneration',
 			},
@@ -229,6 +242,7 @@ export class MarketingArchitects implements INodeType {
 			...textCompletionFields,
 			...imageGenerationFields,
 			...videoGenerationFields,
+			...videoAnalyzeFields,
 			...projectFields,
 			...brandFields,
 			...collageFields,

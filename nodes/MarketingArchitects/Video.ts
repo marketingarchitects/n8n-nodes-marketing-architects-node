@@ -268,3 +268,26 @@ export const videoGenerationFields: INodeProperties[] = [
 		],
 	},
 ];
+
+export const videoAnalyzeFields: INodeProperties[] = [
+	{
+		displayName: 'Video URL',
+		name: 'videoUrl',
+		type: 'string',
+		description: 'The URL of the video to analyze',
+		displayOptions: {
+			show: {
+				resource: ['video'],
+				operation: ['analyzeVideo'],
+			},
+		},
+		default: '',
+		placeholder: 'e.g. https://example.com/video.mp4',
+		routing: {
+			send: {
+				type: 'body',
+				property: 'url',
+			},
+		},
+	},
+];

@@ -47,6 +47,7 @@ This node provides five main resource types with the following operations:
 ### Video Resource
 
 - **Video Generation**: Create AI-generated videos from text prompts using advanced video generation APIs
+- **Analyze Video**: Analyze video content from a given URL to extract insights and metadata
 
 ### Project Resource
 
