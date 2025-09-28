@@ -290,4 +290,54 @@ export const videoAnalyzeFields: INodeProperties[] = [
 			},
 		},
 	},
+	{
+		displayName: 'Custom Prompt',
+		name: 'customPrompt',
+		type: 'string',
+		description: 'Optional custom prompt for video analysis',
+		displayOptions: {
+			show: {
+				resource: ['video'],
+				operation: ['analyzeVideo'],
+			},
+		},
+		default: '',
+		placeholder:
+			'e.g. Analyze this video and extract key information about people, objects, and activities.',
+		typeOptions: {
+			rows: 3,
+		},
+		routing: {
+			send: {
+				type: 'body',
+				property: 'custom_prompt',
+				value: '={{$parameter.customPrompt ? $parameter.customPrompt : undefined}}',
+			},
+		},
+	},
+	{
+		displayName: 'Output Schema',
+		name: 'outputSchema',
+		type: 'json',
+		description: 'Optional JSON schema to define the expected output structure',
+		displayOptions: {
+			show: {
+				resource: ['video'],
+				operation: ['analyzeVideo'],
+			},
+		},
+		default: '',
+		placeholder:
+			'{"type": "object", "properties": {"people": {"type": "array", "items": {"type": "object", "properties": {"description": {"type": "string"}, "actions": {"type": "array", "items": {"type": "string"}}}}}}',
+		typeOptions: {
+			rows: 4,
+		},
+		routing: {
+			send: {
+				type: 'body',
+				property: 'output_schema',
+				value: '={{$parameter.outputSchema ? JSON.parse($parameter.outputSchema) : undefined}}',
+			},
+		},
+	},
 ];
