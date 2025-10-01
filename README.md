@@ -18,11 +18,37 @@ Marketing Architects is a platform for creating and managing marketing campaigns
 - [Compatibility](#compatibility)
 - [Usage](#usage)
 - [Resources](#resources)
-- [Version history](#version-history)
+- [Version History](#version-history)
 - [Development](#development)
 - [Adding New Features](#adding-new-features)
 - [Version Management](#version-management)
 - [Publishing to npm](#publishing-to-npm)
+
+## Version History
+
+### v0.5.1 (Latest)
+
+- **New Feature**: Added Image Resize operation with configurable settings for fit, position, background color, output format, and quality
+- **Enhanced**: Collage creation now includes fit and letterbox color options for better image composition
+- **Improved**: Enhanced video analysis with custom prompt and output schema support
+
+### v0.5.0
+
+- **New Feature**: Added comprehensive video analysis capabilities
+- **Enhanced**: Video analysis now supports custom prompts and structured output schemas
+- **Improved**: Better error handling and retry mechanisms across all operations
+
+### v0.4.1
+
+- **Enhanced**: Added configurable retry settings to all node fields
+- **Fixed**: Capitalized 'Seconds' in 'Retry Delay' field labels for consistency
+- **Improved**: Better error handling and user experience
+
+### v0.4.0
+
+- **New Feature**: Added Collage creation operation for combining multiple images
+- **New Feature**: Added Brand information retrieval functionality
+- **Enhanced**: Improved documentation and streamlined setup instructions
 
 ## Installation
 
@@ -30,7 +56,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-This node provides five main resource types with the following operations:
+This node provides six main resource types with the following operations:
 
 ### Brand Resource
 
@@ -43,11 +69,16 @@ This node provides five main resource types with the following operations:
 ### Image Resource
 
 - **Image Generation**: Create AI-generated images from text prompts using Replicate API
+- **Image Resize**: Resize images with configurable fit, position, background color, output format, and quality settings
 
 ### Video Resource
 
 - **Video Generation**: Create AI-generated videos from text prompts using advanced video generation APIs
-- **Analyze Video**: Analyze video content from a given URL to extract insights and metadata
+- **Analyze Video**: Analyze video content from a given URL to extract insights and metadata with custom prompts and output schemas
+
+### Collage Resource
+
+- **Create Collage**: Combine multiple images into a single collage with configurable layout, fit options, and letterbox color settings
 
 ### Project Resource
 
@@ -66,6 +97,7 @@ To obtain your API credentials, visit the [Marketing Architects API Documentatio
 
 - n8n 1.110.1 and above
 - Node.js 20.15 and above
+- Current version: 0.5.1
 
 ## Usage
 
@@ -74,7 +106,7 @@ To obtain your API credentials, visit the [Marketing Architects API Documentatio
 1. Install the node following the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/)
 2. Configure your Marketing Architects API credentials
 3. Add the Marketing Architects node to your workflow
-4. Select the desired resource (Brand, Text, Image, Video, or Project) and operation
+4. Select the desired resource (Brand, Text, Image, Video, Collage, or Project) and operation
 5. Configure the operation parameters and execute your workflow
 
 ## Resources
