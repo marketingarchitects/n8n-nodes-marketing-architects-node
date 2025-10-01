@@ -115,6 +115,56 @@ export const collageFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Fit',
+		name: 'fit',
+		type: 'options',
+		description: 'How images should be fitted within their allocated space',
+		displayOptions: {
+			show: {
+				resource: ['image'],
+				operation: ['collage'],
+			},
+		},
+		options: [
+			{
+				name: 'Cover',
+				value: 'cover',
+				description: 'Scale the image to cover the entire area, cropping if necessary',
+			},
+			{
+				name: 'Contain',
+				value: 'contain',
+				description: 'Scale the image to fit within the area, maintaining aspect ratio',
+			},
+		],
+		default: 'cover',
+		routing: {
+			send: {
+				type: 'body',
+				property: 'fit',
+			},
+		},
+	},
+	{
+		displayName: 'Letterbox Color',
+		name: 'letterboxColor',
+		type: 'color',
+		description: 'Background color for letterboxing when fit is contain (hex color code)',
+		displayOptions: {
+			show: {
+				resource: ['image'],
+				operation: ['collage'],
+			},
+		},
+		default: '#FFFFFF',
+		routing: {
+			send: {
+				type: 'body',
+				property: 'letterboxColor',
+			},
+		},
+	},
+	{
 		displayName: 'Retry Settings',
 		name: 'retrySettings',
 		placeholder: 'Add retry option',

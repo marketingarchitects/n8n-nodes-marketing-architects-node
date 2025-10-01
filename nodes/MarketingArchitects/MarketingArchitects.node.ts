@@ -1,6 +1,7 @@
 import { NodeConnectionType } from 'n8n-workflow';
 import { textCompletionFields } from './TextCompletion';
 import { imageGenerationFields } from './ImageGeneration';
+import { resizeImageFields } from './ImageResize';
 import { videoGenerationFields, videoAnalyzeFields } from './Video';
 import { projectFields } from './Project';
 import { brandFields } from './Brand';
@@ -165,6 +166,19 @@ export class MarketingArchitects implements INodeType {
 							output: { postReceive: [sendErrorPostReceive] },
 						},
 					},
+					{
+						name: 'Resize Image',
+						value: 'resizeImage',
+						action: 'Resize an image',
+						description: 'Resize an image with specified dimensions and options',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/image/resize',
+							},
+							output: { postReceive: [sendErrorPostReceive] },
+						},
+					},
 				],
 				default: 'imageGeneration',
 			},
@@ -241,6 +255,7 @@ export class MarketingArchitects implements INodeType {
 
 			...textCompletionFields,
 			...imageGenerationFields,
+			...resizeImageFields,
 			...videoGenerationFields,
 			...videoAnalyzeFields,
 			...projectFields,
