@@ -2,6 +2,7 @@ import { NodeConnectionType } from 'n8n-workflow';
 import { textCompletionFields } from './TextCompletion';
 import { imageGenerationFields } from './ImageGeneration';
 import { resizeImageFields } from './ImageResize';
+import { imageAnalysisFields } from './ImageAnalysis';
 import { videoGenerationFields, videoAnalyzeFields } from './Video';
 import { projectFields } from './Project';
 import { brandFields } from './Brand';
@@ -179,6 +180,22 @@ export class MarketingArchitects implements INodeType {
 							output: { postReceive: [sendErrorPostReceive] },
 						},
 					},
+					{
+						name: 'Analyze Image',
+						value: 'analyzeImage',
+						action: 'Analyze an image',
+						description: 'Analyze an image to extract metadata and technical information',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/image/analyze',
+								headers: {
+									'Content-Type': 'multipart/form-data',
+								},
+							},
+							output: { postReceive: [sendErrorPostReceive] },
+						},
+					},
 				],
 				default: 'imageGeneration',
 			},
@@ -256,6 +273,7 @@ export class MarketingArchitects implements INodeType {
 			...textCompletionFields,
 			...imageGenerationFields,
 			...resizeImageFields,
+			...imageAnalysisFields,
 			...videoGenerationFields,
 			...videoAnalyzeFields,
 			...projectFields,

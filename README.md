@@ -26,7 +26,13 @@ Marketing Architects is a platform for creating and managing marketing campaigns
 
 ## Version History
 
-### v0.5.1 (Latest)
+### v0.5.2 (Latest)
+
+- **New Feature**: Added Image Analysis operation to analyze images with custom prompts and extract insights
+- **Enhanced**: Image analysis supports both file uploads and URL-based analysis with customizable prompts
+- **Improved**: Better error handling and retry mechanisms for image analysis operations
+
+### v0.5.1
 
 - **New Feature**: Added Image Resize operation with configurable settings for fit, position, background color, output format, and quality
 - **Enhanced**: Collage creation now includes fit and letterbox color options for better image composition
@@ -70,6 +76,7 @@ This node provides six main resource types with the following operations:
 
 - **Image Generation**: Create AI-generated images from text prompts using Replicate API
 - **Image Resize**: Resize images with configurable fit, position, background color, output format, and quality settings
+- **Analyze Image**: Analyze images with custom prompts to extract insights, metadata, and answer specific questions about image content
 
 ### Video Resource
 
@@ -97,7 +104,7 @@ To obtain your API credentials, visit the [Marketing Architects API Documentatio
 
 - n8n 1.110.1 and above
 - Node.js 20.15 and above
-- Current version: 0.5.1
+- Current version: 0.5.2
 
 ## Usage
 
