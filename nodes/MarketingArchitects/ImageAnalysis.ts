@@ -44,7 +44,26 @@ export const imageAnalysisFields: INodeProperties[] = [
 			},
 		},
 	},
-
+	{
+		displayName: 'Model',
+		name: 'model',
+		type: 'string',
+		description: 'The AI model to use for image analysis',
+		displayOptions: {
+			show: {
+				resource: ['image'],
+				operation: ['analyzeImage'],
+			},
+		},
+		default: '',
+		placeholder: 'gpt-4.1-mini',
+		routing: {
+			send: {
+				type: 'body',
+				property: 'model',
+			},
+		},
+	},
 	{
 		displayName: 'Retry Settings',
 		name: 'retrySettings',
