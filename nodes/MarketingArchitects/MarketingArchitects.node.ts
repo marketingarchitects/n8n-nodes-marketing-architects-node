@@ -3,7 +3,13 @@ import { textCompletionFields } from './TextCompletion';
 import { imageGenerationFields } from './ImageGeneration';
 import { resizeImageFields } from './ImageResize';
 import { imageAnalysisFields } from './ImageAnalysis';
-import { videoGenerationFields, videoAnalyzeFields } from './Video';
+import {
+	videoGenerationFields,
+	videoAnalyzeFields,
+	videoSoraFields,
+	getVideoSoraFields,
+	getVideoSoraUrlFields,
+} from './Video';
 import { projectFields } from './Project';
 import { brandFields } from './Brand';
 import { collageFields } from './Collage';
@@ -224,6 +230,45 @@ export class MarketingArchitects implements INodeType {
 						},
 					},
 					{
+						name: 'Create Video with Sora',
+						value: 'videoSora',
+						action: 'Create a video with sora',
+						description: 'Create a video using OpenAI Sora model',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/video/openai',
+							},
+							output: { postReceive: [sendErrorPostReceive] },
+						},
+					},
+					{
+						name: 'Get Sora Video Status',
+						value: 'getVideoSora',
+						action: 'Get a sora video status',
+						description: 'Retrieve the status of a sora video by ID',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/video/openai/{{$parameter.videoId}}',
+							},
+							output: { postReceive: [sendErrorPostReceive] },
+						},
+					},
+					{
+						name: 'Get Sora Video URL',
+						value: 'getVideoSoraUrl',
+						action: 'Get a sora video URL',
+						description: 'Retrieve the download URL for a sora video by ID',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '=/video/openai/{{$parameter.videoId}}/download',
+							},
+							output: { postReceive: [sendErrorPostReceive] },
+						},
+					},
+					{
 						name: 'Analyze Video',
 						value: 'analyzeVideo',
 						action: 'Analyze a video',
@@ -275,6 +320,9 @@ export class MarketingArchitects implements INodeType {
 			...resizeImageFields,
 			...imageAnalysisFields,
 			...videoGenerationFields,
+			...videoSoraFields,
+			...getVideoSoraFields,
+			...getVideoSoraUrlFields,
 			...videoAnalyzeFields,
 			...projectFields,
 			...brandFields,

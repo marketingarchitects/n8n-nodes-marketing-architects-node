@@ -26,7 +26,15 @@ Marketing Architects is a platform for creating and managing marketing campaigns
 
 ## Version History
 
-### v0.5.2 (Latest)
+### v0.6.0 (Latest)
+
+- **New Feature**: Added OpenAI Sora video generation integration with three new operations
+- **Enhanced**: Create videos using OpenAI's Sora model (Sora 2 and Sora 2 Pro) with customizable size and duration options
+- **New Operation**: Get Sora Video Status - Check the current status of video generation by ID
+- **New Operation**: Get Sora Video URL - Retrieve download URLs for completed Sora videos
+- **Improved**: Comprehensive video workflow support from creation to download
+
+### v0.5.2
 
 - **New Feature**: Added Image Analysis operation to analyze images with custom prompts and extract insights
 - **Enhanced**: Image analysis supports both file uploads and URL-based analysis with customizable prompts
@@ -81,6 +89,9 @@ This node provides six main resource types with the following operations:
 ### Video Resource
 
 - **Video Generation**: Create AI-generated videos from text prompts using advanced video generation APIs
+- **Create Video with Sora**: Generate videos using OpenAI's Sora model with customizable parameters (model version, size, duration, and optional input reference)
+- **Get Sora Video Status**: Retrieve the current status of a Sora video generation by video ID
+- **Get Sora Video URL**: Retrieve the download URL for a completed Sora video by video ID
 - **Analyze Video**: Analyze video content from a given URL to extract insights and metadata with custom prompts and output schemas
 
 ### Collage Resource
@@ -104,7 +115,7 @@ To obtain your API credentials, visit the [Marketing Architects API Documentatio
 
 - n8n 1.110.1 and above
 - Node.js 20.15 and above
-- Current version: 0.5.2
+- Current version: 0.6.0
 
 ## Usage
 
@@ -115,6 +126,34 @@ To obtain your API credentials, visit the [Marketing Architects API Documentatio
 3. Add the Marketing Architects node to your workflow
 4. Select the desired resource (Brand, Text, Image, Video, Collage, or Project) and operation
 5. Configure the operation parameters and execute your workflow
+
+### Using Sora Video Generation
+
+The Sora video operations enable a complete workflow for AI-powered video creation:
+
+#### 1. Create Video with Sora
+
+Generate videos using OpenAI's Sora model with the following parameters:
+
+- **Prompt** (required): Describe the video you want to generate
+- **Model**: Choose between Sora 2 (default) or Sora 2 Pro
+- **Size**: Select resolution - 1280x720 (720p), 1920x1080 (1080p), or 720x1280 (portrait)
+- **Duration**: Choose video length - 4, 8 (default), 12, or 16 seconds
+- **Options**: Optionally add input reference for additional control
+
+#### 2. Get Sora Video Status
+
+Check the generation status of your video by providing the video ID returned from the creation step.
+
+#### 3. Get Sora Video URL
+
+Once your video generation is complete, retrieve the download URL using the video ID.
+
+**Example Workflow:**
+
+1. Use "Create Video with Sora" to start generation → Returns video ID
+2. Use "Get Sora Video Status" to monitor progress → Check if completed
+3. Use "Get Sora Video URL" to download → Retrieve final video URL
 
 ## Resources
 
