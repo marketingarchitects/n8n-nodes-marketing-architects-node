@@ -113,6 +113,10 @@ export const imageGenerationFields: INodeProperties[] = [
 						value: '1:1',
 					},
 					{
+						name: '2:3',
+						value: '2:3',
+					},
+					{
 						name: '16:9',
 						value: '16:9',
 					},
