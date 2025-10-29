@@ -125,6 +125,23 @@ export const videoGenerationFields: INodeProperties[] = [
 				},
 			},
 			{
+				displayName: 'Duration',
+				name: 'duration',
+				type: 'number',
+				default: 4,
+				description: 'The duration of the video in seconds (4-12)',
+				typeOptions: {
+					minValue: 4,
+					maxValue: 12,
+				},
+				routing: {
+					send: {
+						type: 'body',
+						property: 'input.duration',
+					},
+				},
+			},
+			{
 				displayName: 'Image',
 				name: 'image',
 				default: '',
