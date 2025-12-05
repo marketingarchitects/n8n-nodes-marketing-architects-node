@@ -205,6 +205,19 @@ export const imageGenerationFields: INodeProperties[] = [
 					},
 				},
 			},
+			{
+				displayName: 'Resolution',
+				name: 'resolution',
+				default: '',
+				description: 'The resolution for the image generation',
+				type: 'string',
+				routing: {
+					send: {
+						type: 'body',
+						property: 'input.resolution',
+					},
+				},
+			},
 		],
 	},
 	{
