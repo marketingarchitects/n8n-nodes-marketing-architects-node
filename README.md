@@ -85,6 +85,7 @@ This node provides six main resource types with the following operations:
 - **Image Generation**: Create AI-generated images from text prompts using Replicate API
 - **Image Resize**: Resize images with configurable fit, position, background color, output format, and quality settings
 - **Analyze Image**: Analyze images with custom prompts to extract insights, metadata, and answer specific questions about image content
+- **Webhook Support (Image Generation)**: Optionally provide a webhook URL to receive asynchronous updates or callbacks for image generation requests
 
 ### Video Resource
 
@@ -93,6 +94,7 @@ This node provides six main resource types with the following operations:
 - **Get Sora Video Status**: Retrieve the current status of a Sora video generation by video ID
 - **Get Sora Video URL**: Retrieve the download URL for a completed Sora video by video ID
 - **Analyze Video**: Analyze video content from a given URL to extract insights and metadata with custom prompts and output schemas
+- **Webhook Support (Video Generation)**: Optionally provide a webhook URL to receive asynchronous updates or callbacks for video generation requests
 
 ### Collage Resource
 

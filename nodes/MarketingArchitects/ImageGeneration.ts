@@ -218,6 +218,20 @@ export const imageGenerationFields: INodeProperties[] = [
 					},
 				},
 			},
+			{
+				displayName: 'Webhook URL',
+				name: 'webhook',
+				type: 'string',
+				default: '',
+				description:
+					'Optional webhook URL to receive asynchronous updates or callbacks for this image generation request',
+				routing: {
+					send: {
+						type: 'body',
+						property: 'webhook_url',
+					},
+				},
+			},
 		],
 	},
 	{
